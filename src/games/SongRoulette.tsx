@@ -18,7 +18,8 @@ export default function SongRoulette() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingSongs, setEditingSongs] = useState<string[]>([]);
 
-  // 広告用の状態（Adult Modeのみ）
+  // 広告用の状態（Adult Modeのみ）- 3回に1回
+  const [spinCount, setSpinCount] = useState(0);
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
@@ -60,9 +61,14 @@ export default function SongRoulette() {
         setSelectedSong(songs[finalIndex]);
         setIsSpinning(false);
 
-        // Adult Modeでは毎回広告表示
+        // Adult Modeでは3回に1回広告表示
         if (isAdult) {
-          setShowAd(true);
+          const newCount = spinCount + 1;
+          setSpinCount(newCount);
+          if (newCount >= 3) {
+            setShowAd(true);
+            setSpinCount(0);
+          }
         }
       }
     }, 100);

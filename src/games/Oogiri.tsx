@@ -13,15 +13,23 @@ export default function Oogiri() {
 
   const prompts = isAdult ? OOGIRI_PROMPTS : OOGIRI_PROMPTS_NORMAL;
   const [currentPrompt, setCurrentPrompt] = useState<string | null>(null);
+
+  // 広告用の状態（Adult Modeのみ）- 7回に1回
+  const [promptCount, setPromptCount] = useState(0);
   const [showAd, setShowAd] = useState(false);
 
   const getRandomPrompt = () => {
     const randomIndex = Math.floor(Math.random() * prompts.length);
     setCurrentPrompt(prompts[randomIndex]);
 
-    // Adult Modeでは毎回広告表示
+    // Adult Modeでは7回に1回広告表示
     if (isAdult) {
-      setShowAd(true);
+      const newCount = promptCount + 1;
+      setPromptCount(newCount);
+      if (newCount >= 7) {
+        setShowAd(true);
+        setPromptCount(0);
+      }
     }
   };
 

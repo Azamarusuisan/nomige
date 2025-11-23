@@ -60,7 +60,8 @@ export default function HighLow() {
   const [result, setResult] = useState<string>("");
   const [showResult, setShowResult] = useState(false);
 
-  // 広告用の状態（Adult Modeのみ）
+  // 広告用の状態（Adult Modeのみ）- 9回に1回
+  const [guessCount, setGuessCount] = useState(0);
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
@@ -106,9 +107,14 @@ export default function HighLow() {
     }
     setResult(resultText);
 
-    // Adult Modeでは毎回広告表示
+    // Adult Modeでは9回に1回広告表示
     if (isAdult) {
-      setShowAd(true);
+      const newCount = guessCount + 1;
+      setGuessCount(newCount);
+      if (newCount >= 9) {
+        setShowAd(true);
+        setGuessCount(0);
+      }
     }
 
     setTimeout(() => {

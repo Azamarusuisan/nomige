@@ -13,7 +13,8 @@ export default function Roulette() {
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
 
-  // 広告用の状態（Adult Modeのみ）
+  // 広告用の状態（Adult Modeのみ）- 3回に1回
+  const [spinCount, setSpinCount] = useState(0);
   const [showAd, setShowAd] = useState(false);
 
   const spin = () => {
@@ -33,9 +34,14 @@ export default function Roulette() {
         setSelectedGame(ROULETTE_LIST[finalIndex]);
         setIsSpinning(false);
 
-        // Adult Modeでは毎回広告表示
+        // Adult Modeでは3回に1回広告表示
         if (isAdult) {
-          setShowAd(true);
+          const newCount = spinCount + 1;
+          setSpinCount(newCount);
+          if (newCount >= 3) {
+            setShowAd(true);
+            setSpinCount(0);
+          }
         }
       }
     }, 100);
