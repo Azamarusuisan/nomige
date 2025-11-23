@@ -9,7 +9,6 @@ export default function Home() {
   const [pendingMode, setPendingMode] = useState<"normal" | "adult" | null>(null);
 
   useEffect(() => {
-    // 初回のみ広告通知を表示するかチェック
     const shown = localStorage.getItem(AD_NOTICE_KEY);
     if (!shown) {
       // まだ表示していない
@@ -37,47 +36,54 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6">
-      <h1 className="text-5xl font-bold text-gold mb-4 text-center">
-        飲みゲー
-      </h1>
-      <p className="text-gold-light text-xl mb-12 text-center">
-        Ultimate Party Games
-      </p>
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6 animate-fade-in">
+      {/* ロゴエリア */}
+      <div className="text-center mb-12">
+        <h1 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light mb-3 tracking-tight">
+          飲みゲー
+        </h1>
+        <p className="text-gold-light/70 text-lg font-medium tracking-widest uppercase">
+          Ultimate Party Games
+        </p>
+      </div>
 
-      <div className="space-y-4 w-full max-w-xs">
+      {/* モード選択ボタン */}
+      <div className="space-y-5 w-full max-w-sm">
         <button
           onClick={() => handleModeSelect("normal")}
-          className="w-full bg-gradient-to-r from-gold to-gold-light text-black font-bold text-xl px-8 py-5 rounded-2xl shadow-lg transform transition hover:scale-105 active:scale-95"
+          className="btn-ios w-full glass-card glow-gold px-8 py-6 rounded-3xl shadow-ios flex items-center justify-center space-x-3"
         >
-          🍻 Normal Mode
+          <span className="text-3xl">🍻</span>
+          <span className="text-gold font-bold text-xl">Normal Mode</span>
         </button>
 
         <button
           onClick={() => handleModeSelect("adult")}
-          className="w-full bg-gradient-to-r from-pink-600 to-red-500 text-white font-bold text-xl px-8 py-5 rounded-2xl shadow-lg transform transition hover:scale-105 active:scale-95"
+          className="btn-ios w-full glass-card-pink glow-pink px-8 py-6 rounded-3xl shadow-ios flex items-center justify-center space-x-3"
         >
-          🔞 Adult Mode
+          <span className="text-3xl">🔞</span>
+          <span className="text-pink-400 font-bold text-xl">Adult Mode</span>
         </button>
       </div>
 
-      <p className="text-gray-500 text-sm mt-8 text-center">
+      {/* 注意書き */}
+      <p className="text-gray-600 text-sm mt-10 text-center font-medium">
         ※ Adult Modeは18歳以上向けです
       </p>
 
       {/* 広告通知モーダル */}
       {showAdNotice && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-6">
-          <div className="bg-gradient-to-br from-gray-900 to-black border-2 border-gold rounded-2xl p-8 max-w-sm w-full text-center">
-            <div className="text-4xl mb-4">📢</div>
-            <h2 className="text-2xl font-bold text-gold mb-4">お知らせ</h2>
-            <p className="text-gold-light mb-6 leading-relaxed">
+        <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-6 animate-fade-in">
+          <div className="glass-card-pink rounded-4xl p-8 max-w-sm w-full text-center shadow-ios-lg">
+            <div className="text-5xl mb-5">📢</div>
+            <h2 className="text-2xl font-bold text-pink-400 mb-4">お知らせ</h2>
+            <p className="text-pink-200/80 mb-8 leading-relaxed">
               このアプリは一部広告を使用しています。<br />
               運営費に充てています。
             </p>
             <button
               onClick={handleAdNoticeClose}
-              className="w-full bg-gold text-black font-bold py-3 rounded-xl hover:bg-gold-light transition"
+              className="btn-ios w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-2xl shadow-lg"
             >
               OK
             </button>

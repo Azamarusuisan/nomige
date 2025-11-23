@@ -13,4 +13,5 @@ export interface Game {
   id: GameId;
   title: string;
   description: string;
+  emoji: string;
 }
