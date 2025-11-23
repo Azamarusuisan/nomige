@@ -45,6 +45,9 @@ export default function Home() {
         <p className="text-gold-light/70 text-lg font-medium tracking-widest uppercase">
           Ultimate Party Games
         </p>
+        <p className="text-gold/50 text-xs mt-3">
+          このゲームは全部AIによって考えられました
+        </p>
       </div>
 
       {/* モード選択ボタン */}

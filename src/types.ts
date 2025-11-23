@@ -1,16 +1,35 @@
 export type GameMode = "normal" | "adult";
 
-export type GameId =
-  | "highlow"
-  | "kingscup"
+// Normal mode game slugs
+export type NormalGameSlug =
+  | "kingcup"
   | "roulette"
-  | "ojisan"
-  | "oogiri"
-  | "songroulette"
-  | "cabajou";
+  | "king"
+  | "wolf"
+  | "truth"
+  | "love"
+  | "roles"
+  | "vote"
+  | "pointfinger"
+  | "seatroulette";
+
+// Adult mode game slugs
+export type AdultGameSlug =
+  | "a_truth"
+  | "a_oogiri"
+  | "a_pointfinger"
+  | "a_vote"
+  | "a_roulette"
+  | "a_story"
+  | "a_rank"
+  | "a_secret"
+  | "a_mission"
+  | "a_fantasy";
+
+export type GameSlug = NormalGameSlug | AdultGameSlug;
 
 export interface Game {
-  id: GameId;
+  id: string;
   title: string;
   description: string;
   emoji: string;

@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { GAMES } from "../data/games";
+import { getNormalGames, getAdultGames } from "../data/gamesConfig";
 import type { GameMode } from "../types";
 
 export default function Select() {
@@ -7,6 +7,8 @@ export default function Select() {
   const [searchParams] = useSearchParams();
   const mode = (searchParams.get("mode") as GameMode) || "normal";
   const isAdult = mode === "adult";
+
+  const games = isAdult ? getAdultGames() : getNormalGames();
 
   return (
     <div className="min-h-screen bg-black p-6 animate-fade-in">
@@ -31,18 +33,21 @@ export default function Select() {
 
         {/* ゲームカードグリッド */}
         <div className="grid grid-cols-2 gap-4">
-          {GAMES.map((game, index) => (
+          {games.map((game, index) => (
             <button
-              key={game.id}
-              onClick={() => navigate(`/game/${game.id}?mode=${mode}`)}
+              key={game.slug}
+              onClick={() => navigate(`/game/${game.slug}?mode=${mode}`)}
               className={`btn-ios ${isAdult ? "glass-card-pink glow-pink" : "glass-card glow-gold"} p-5 rounded-3xl shadow-ios text-left`}
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <h2 className={`text-lg font-bold mb-2 ${
-                isAdult ? "text-pink-400" : "text-gold"
-              }`}>
-                {game.title}
-              </h2>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">{game.emoji}</span>
+                <h2 className={`text-base font-bold ${
+                  isAdult ? "text-pink-400" : "text-gold"
+                }`}>
+                  {game.title}
+                </h2>
+              </div>
               <p className={`text-xs opacity-70 leading-relaxed ${
                 isAdult ? "text-pink-200" : "text-gold-light"
               }`}>
