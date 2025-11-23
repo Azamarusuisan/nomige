@@ -29,20 +29,6 @@ export default function Select() {
           </h1>
         </div>
 
-        {/* Adult Mode: 上部広告 */}
-        {isAdult && (
-          <div className="mb-6 glass-card-pink glow-pink rounded-3xl p-5 text-center">
-            <a
-              href="https://example.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-pink-300 hover:text-pink-100 transition font-medium"
-            >
-              🔞 今日話せる相手を探す →
-            </a>
-          </div>
-        )}
-
         {/* ゲームカードグリッド */}
         <div className="grid grid-cols-2 gap-4">
           {GAMES.map((game, index) => (
@@ -65,20 +51,6 @@ export default function Select() {
             </button>
           ))}
         </div>
-
-        {/* Adult Mode: 下部広告 */}
-        {isAdult && (
-          <div className="mt-6 glass-card-pink glow-pink rounded-3xl p-5 text-center">
-            <a
-              href="https://example.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-pink-300 hover:text-pink-100 transition font-medium"
-            >
-              💕 出会いを見つける →
-            </a>
-          </div>
-        )}
 
         {/* 戻るボタン */}
         <button

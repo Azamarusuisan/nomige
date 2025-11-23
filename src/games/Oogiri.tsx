@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
 import { OOGIRI_PROMPTS } from "../data/oogiriPrompts";
 import { OOGIRI_PROMPTS_NORMAL } from "../data/oogiriPromptsNormal";
 import type { GameMode } from "../types";
@@ -12,10 +13,20 @@ export default function Oogiri() {
 
   const prompts = isAdult ? OOGIRI_PROMPTS : OOGIRI_PROMPTS_NORMAL;
   const [currentPrompt, setCurrentPrompt] = useState<string | null>(null);
+  const [showAd, setShowAd] = useState(false);
 
   const getRandomPrompt = () => {
     const randomIndex = Math.floor(Math.random() * prompts.length);
     setCurrentPrompt(prompts[randomIndex]);
+
+    // Adult Modeでは毎回広告表示
+    if (isAdult) {
+      setShowAd(true);
+    }
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   return (
@@ -71,19 +82,8 @@ export default function Oogiri() {
           全{prompts.length}種類のお題
         </div>
 
-        {/* Adult Mode: 広告 */}
-        {isAdult && (
-          <div className="w-full bg-gradient-to-r from-pink-900 to-purple-900 border border-pink-500 rounded-2xl p-4 text-center">
-            <a
-              href="https://example.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-pink-300 hover:text-pink-100 transition"
-            >
-              🔞 今日話せる相手を探す →
-            </a>
-          </div>
-        )}
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );

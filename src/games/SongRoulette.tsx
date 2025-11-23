@@ -1,15 +1,25 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
 import { DEFAULT_SONGS } from "../data/songs";
+import type { GameMode } from "../types";
 
 const STORAGE_KEY = "songroulette-songs";
 
 export default function SongRoulette() {
+  const [searchParams] = useSearchParams();
+  const mode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = mode === "adult";
+
   const [songs, setSongs] = useState<string[]>([]);
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editingSongs, setEditingSongs] = useState<string[]>([]);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
     loadSongs();
@@ -49,8 +59,17 @@ export default function SongRoulette() {
         const finalIndex = Math.floor(Math.random() * songs.length);
         setSelectedSong(songs[finalIndex]);
         setIsSpinning(false);
+
+        // Adult Modeでは毎回広告表示
+        if (isAdult) {
+          setShowAd(true);
+        }
       }
     }, 100);
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   const startEdit = () => {
@@ -210,6 +229,9 @@ export default function SongRoulette() {
             ))}
           </div>
         </div>
+
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );

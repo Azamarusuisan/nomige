@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
+import type { GameMode } from "../types";
 
 type Suit = "♠" | "♥" | "♦" | "♣";
 type Rank = "A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K";
@@ -47,11 +50,18 @@ function shuffleDeck(deck: Card[]): Card[] {
 }
 
 export default function HighLow() {
+  const [searchParams] = useSearchParams();
+  const mode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = mode === "adult";
+
   const [deck, setDeck] = useState<Card[]>([]);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [nextCard, setNextCard] = useState<Card | null>(null);
   const [result, setResult] = useState<string>("");
   const [showResult, setShowResult] = useState(false);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
     startGame();
@@ -96,6 +106,11 @@ export default function HighLow() {
     }
     setResult(resultText);
 
+    // Adult Modeでは毎回広告表示
+    if (isAdult) {
+      setShowAd(true);
+    }
+
     setTimeout(() => {
       setCurrentCard(next);
       setDeck(deck.slice(1));
@@ -103,6 +118,10 @@ export default function HighLow() {
       setShowResult(false);
       setResult("");
     }, 2000);
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   const getSuitColor = (suit: Suit) => {
@@ -167,10 +186,17 @@ export default function HighLow() {
 
         <button
           onClick={startGame}
-          className="bg-gray-800 text-gold px-6 py-3 rounded-lg border border-gold hover:bg-gray-700 transition font-bold"
+          className={`px-6 py-3 rounded-lg border transition font-bold ${
+            isAdult
+              ? "bg-gray-800 text-pink-400 border-pink-500 hover:bg-gray-700"
+              : "bg-gray-800 text-gold border-gold hover:bg-gray-700"
+          }`}
         >
           新しいゲーム
         </button>
+
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );

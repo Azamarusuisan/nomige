@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
 import { OJISAN_IMAGES } from "../data/ojisanImages";
+import type { GameMode } from "../types";
 
 type CardType = "normal" | "dobon";
 
@@ -11,9 +14,16 @@ interface Card {
 }
 
 export default function Ojisan() {
+  const [searchParams] = useSearchParams();
+  const mode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = mode === "adult";
+
   const [cards, setCards] = useState<Card[]>([]);
   const [dobonImage, setDobonImage] = useState<string | null>(null);
   const [showDobon, setShowDobon] = useState(false);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
     initializeGame();
@@ -56,6 +66,15 @@ export default function Ojisan() {
       }
       setShowDobon(true);
     }
+
+    // Adult Modeでは毎回広告表示
+    if (isAdult) {
+      setShowAd(true);
+    }
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   const closeDobon = () => {
@@ -126,6 +145,9 @@ export default function Ojisan() {
             </div>
           </div>
         )}
+
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );

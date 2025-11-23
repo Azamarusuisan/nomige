@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
 import { DEFAULT_KINGS_RULES } from "../data/kingsRules";
 import type { KingsRule } from "../data/kingsRules";
+import type { GameMode } from "../types";
 
 type Suit = "♠" | "♥" | "♦" | "♣";
 type Rank = "A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K";
@@ -35,6 +38,10 @@ function shuffleDeck(deck: Card[]): Card[] {
 }
 
 export default function KingsCup() {
+  const [searchParams] = useSearchParams();
+  const gameMode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = gameMode === "adult";
+
   const [mode, setMode] = useState<"game" | "edit">("game");
   const [rules, setRules] = useState<KingsRule[]>([]);
   const [editingCard, setEditingCard] = useState<string | null>(null);
@@ -44,6 +51,11 @@ export default function KingsCup() {
   const [deck, setDeck] = useState<Card[]>([]);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [showRule, setShowRule] = useState(false);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [drawCount, setDrawCount] = useState(0);
+  const [nextAdAt, setNextAdAt] = useState(() => Math.floor(Math.random() * 4) + 7); // 7-10
+  const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
     loadRules();
@@ -83,6 +95,22 @@ export default function KingsCup() {
     setCurrentCard(card);
     setShowRule(true);
     setDeck(deck.slice(1));
+
+    // Adult Modeの広告ロジック
+    if (isAdult) {
+      const newDrawCount = drawCount + 1;
+      setDrawCount(newDrawCount);
+
+      if (newDrawCount >= nextAdAt) {
+        setShowAd(true);
+        setDrawCount(0);
+        setNextAdAt(Math.floor(Math.random() * 4) + 7); // 次は7-10枚後
+      }
+    }
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   const closeRule = () => {
@@ -179,7 +207,7 @@ export default function KingsCup() {
           {/* ルール表示モーダル */}
           {showRule && currentCard && (
             <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
-              <div className="bg-gradient-to-br from-gray-900 to-black border-4 border-gold rounded-2xl p-8 max-w-md w-full">
+              <div className={`bg-gradient-to-br from-gray-900 to-black border-4 ${isAdult ? "border-pink-500" : "border-gold"} rounded-2xl p-8 max-w-md w-full`}>
                 <div className="flex items-center justify-center mb-6">
                   <div className="bg-white rounded-xl p-6 w-32 h-44 flex flex-col items-center justify-center shadow-xl">
                     <div className={`text-5xl ${getSuitColor(currentCard.suit)}`}>
@@ -191,21 +219,24 @@ export default function KingsCup() {
                   </div>
                 </div>
 
-                <div className="bg-black border-2 border-gold rounded-lg p-4 mb-6">
-                  <div className="text-gold-light text-lg leading-relaxed text-center">
+                <div className={`bg-black border-2 ${isAdult ? "border-pink-500" : "border-gold"} rounded-lg p-4 mb-6`}>
+                  <div className={`text-lg leading-relaxed text-center ${isAdult ? "text-pink-300" : "text-gold-light"}`}>
                     {getCurrentRule(currentCard.rank)}
                   </div>
                 </div>
 
                 <button
                   onClick={closeRule}
-                  className="w-full bg-gold text-black font-bold py-3 rounded-lg hover:bg-gold-light transition"
+                  className={`w-full font-bold py-3 rounded-lg transition ${isAdult ? "bg-pink-500 text-white hover:bg-pink-600" : "bg-gold text-black hover:bg-gold-light"}`}
                 >
                   OK
                 </button>
               </div>
             </div>
           )}
+
+          {/* 広告モーダル（Adult Modeのみ） */}
+          <AdModal isOpen={showAd} onClose={handleAdClose} />
         </div>
       </GameLayout>
     );

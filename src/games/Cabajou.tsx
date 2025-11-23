@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
+import type { GameMode } from "../types";
 
 type Suit = "♠" | "♥" | "♦" | "♣";
 type Rank = "A" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "J" | "Q" | "K";
@@ -53,11 +56,20 @@ function shuffleDeck(deck: Card[]): Card[] {
 }
 
 export default function Cabajou() {
+  const [searchParams] = useSearchParams();
+  const mode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = mode === "adult";
+
   const [deck, setDeck] = useState<Card[]>([]);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [showEffect, setShowEffect] = useState(false);
   const [holdCards, setHoldCards] = useState<HoldCard[]>([]);
   const [hasKabajou, setHasKabajou] = useState(false);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [drawCount, setDrawCount] = useState(0);
+  const [nextAdAt, setNextAdAt] = useState(() => Math.floor(Math.random() * 4) + 7); // 7-10
+  const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
     startGame();
@@ -102,6 +114,22 @@ export default function Cabajou() {
     if (card.rank === "2") {
       setHasKabajou(true);
     }
+
+    // Adult Modeの広告ロジック
+    if (isAdult) {
+      const newDrawCount = drawCount + 1;
+      setDrawCount(newDrawCount);
+
+      if (newDrawCount >= nextAdAt) {
+        setShowAd(true);
+        setDrawCount(0);
+        setNextAdAt(Math.floor(Math.random() * 4) + 7); // 次は7-10枚後
+      }
+    }
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   const useHoldCard = (rank: Rank) => {
@@ -253,6 +281,9 @@ export default function Cabajou() {
             ))}
           </div>
         </div>
+
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );

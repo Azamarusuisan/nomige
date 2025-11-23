@@ -1,10 +1,20 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import GameLayout from "../components/GameLayout";
+import AdModal from "../components/AdModal";
 import { ROULETTE_LIST } from "../data/rouletteList";
+import type { GameMode } from "../types";
 
 export default function Roulette() {
+  const [searchParams] = useSearchParams();
+  const mode = (searchParams.get("mode") as GameMode) || "normal";
+  const isAdult = mode === "adult";
+
   const [selectedGame, setSelectedGame] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
+
+  // 広告用の状態（Adult Modeのみ）
+  const [showAd, setShowAd] = useState(false);
 
   const spin = () => {
     setIsSpinning(true);
@@ -22,8 +32,17 @@ export default function Roulette() {
         const finalIndex = Math.floor(Math.random() * ROULETTE_LIST.length);
         setSelectedGame(ROULETTE_LIST[finalIndex]);
         setIsSpinning(false);
+
+        // Adult Modeでは毎回広告表示
+        if (isAdult) {
+          setShowAd(true);
+        }
       }
     }, 100);
+  };
+
+  const handleAdClose = () => {
+    setShowAd(false);
   };
 
   return (
@@ -75,6 +94,9 @@ export default function Roulette() {
             ))}
           </div>
         </div>
+
+        {/* 広告モーダル（Adult Modeのみ） */}
+        <AdModal isOpen={showAd} onClose={handleAdClose} />
       </div>
     </GameLayout>
   );
