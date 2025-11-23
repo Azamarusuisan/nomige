@@ -52,8 +52,7 @@ export default function Select() {
               className={`btn-ios ${isAdult ? "glass-card-pink glow-pink" : "glass-card glow-gold"} p-5 rounded-3xl shadow-ios text-left`}
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="text-3xl mb-2">{game.emoji || "🎮"}</div>
-              <h2 className={`text-lg font-bold mb-1 ${
+              <h2 className={`text-lg font-bold mb-2 ${
                 isAdult ? "text-pink-400" : "text-gold"
               }`}>
                 {game.title}
