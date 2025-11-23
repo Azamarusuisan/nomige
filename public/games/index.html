@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飲み会ゲーム一覧｜ルール・遊び方完全ガイド | 飲みゲー</title>
+  <meta name="description" content="飲み会で盛り上がるゲームを完全網羅！山手線ゲーム、キャバ嬢ゲーム、サーティーワンなど人気ゲームのルール・遊び方を解説。そのままWebで遊べます。">
+  <meta name="keywords" content="飲み会ゲーム, 飲みゲー, ルール, 遊び方, 山手線ゲーム, キャバ嬢ゲーム">
+  <link rel="canonical" href="https://nomigee.com/games/">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "飲み会ゲーム一覧",
+    "description": "飲み会で盛り上がるゲームのルール・遊び方完全ガイド",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "山手線ゲーム", "url": "https://nomigee.com/games/yamanote/"},
+      {"@type": "ListItem", "position": 2, "name": "キャバ嬢ゲーム", "url": "https://nomigee.com/games/cabajou/"},
+      {"@type": "ListItem", "position": 3, "name": "おじさんくじ引き", "url": "https://nomigee.com/games/ojisan/"},
+      {"@type": "ListItem", "position": 4, "name": "飲みゲールーレット", "url": "https://nomigee.com/games/roulette/"},
+      {"@type": "ListItem", "position": 5, "name": "少人数ゲーム", "url": "https://nomigee.com/games/small/"},
+      {"@type": "ListItem", "position": 6, "name": "サーティーワンゲーム", "url": "https://nomigee.com/games/thirtyone/"},
+      {"@type": "ListItem", "position": 7, "name": "ドライブゲーム", "url": "https://nomigee.com/games/drive/"},
+      {"@type": "ListItem", "position": 8, "name": "ピンポンパンゲーム", "url": "https://nomigee.com/games/pingpong/"},
+      {"@type": "ListItem", "position": 9, "name": "マンションゲーム", "url": "https://nomigee.com/games/mansion/"}
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #D4AF37;
+      min-height: 100vh;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      color: rgba(212, 175, 55, 0.7);
+      font-size: 0.95rem;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #FFD700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .game-list { display: flex; flex-direction: column; gap: 16px; }
+    .game-card {
+      display: block;
+      background: rgba(30, 30, 30, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      padding: 20px 24px;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .game-card:active { transform: scale(0.98); }
+    .game-card-title {
+      color: #FFD700;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .game-card-desc {
+      color: rgba(212, 175, 55, 0.75);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .game-card-arrow {
+      margin-left: auto;
+      color: rgba(212, 175, 55, 0.5);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.2);
+      color: #FFD700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .cta-section {
+      margin-top: 32px;
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .cta-section h2 {
+      color: #FFD700;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      color: rgba(212, 175, 55, 0.8);
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+      color: #000;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">飲みゲー</div>
+      <div class="tagline">Ultimate Party Games</div>
+    </div>
+
+    <h1>飲み会ゲーム一覧</h1>
+
+    <div class="game-list">
+      <a href="/games/yamanote/" class="game-card">
+        <div class="game-card-title">
+          🚃 山手線ゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">お題に沿った回答を順番に。詰まったら飲む定番ゲーム</div>
+      </a>
+
+      <a href="/games/cabajou/" class="game-card">
+        <div class="game-card-title">
+          🃏 キャバ嬢ゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">トランプを使った飲み会の王道。カードごとにルールあり</div>
+      </a>
+
+      <a href="/games/ojisan/" class="game-card">
+        <div class="game-card-title">
+          👴 おじさんくじ引き
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">ドボンを引いたら罰ゲーム！シンプル運ゲー</div>
+      </a>
+
+      <a href="/games/roulette/" class="game-card">
+        <div class="game-card-title">
+          🎰 飲みゲールーレット
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">何のゲームをするか迷ったらコレ！ランダム決定</div>
+      </a>
+
+      <a href="/games/thirtyone/" class="game-card">
+        <div class="game-card-title">
+          🔢 サーティーワンゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">31を言った人が負け。戦略と心理戦のゲーム</div>
+      </a>
+
+      <a href="/games/pingpong/" class="game-card">
+        <div class="game-card-title">
+          🏓 ピンポンパンゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">ピン・ポン・パンをリズムよく。パンで次を指名</div>
+      </a>
+
+      <a href="/games/drive/" class="game-card">
+        <div class="game-card-title">
+          🚗 ドライブゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">ハンドルを握ってコマンドに反応するリアクションゲーム</div>
+      </a>
+
+      <a href="/games/mansion/" class="game-card">
+        <div class="game-card-title">
+          🏢 マンションゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">階数と部屋番号を順番に。酔うほど頭が回らない</div>
+      </a>
+
+      <a href="/games/small/" class="game-card">
+        <div class="game-card-title">
+          👥 少人数ゲーム
+          <span class="game-card-arrow">→</span>
+        </div>
+        <div class="game-card-desc">2〜4人でも盛り上がるゲーム特集</div>
+      </a>
+    </div>
+
+    <div class="cta-section">
+      <h2>🎮 今すぐ遊ぶ</h2>
+      <p>スマホでそのまま全ゲームがプレイできます！</p>
+      <a href="/" class="cta-button">▶ アプリを開く</a>
+    </div>
+  </div>
+</body>
+</html>
