@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>【飲み会ゲーム】山手線ゲーム｜遊び方・ルール・派生</title>
   <meta name="description" content="山手線ゲームの遊び方・ルール・派生を解説。実在駅名を順番に言い、詰まった人が飲む定番の飲み会ゲームです。">
   <meta name="keywords" content="山手線ゲーム, 飲み会ゲーム, 飲みゲー, ルール, 遊び方">
   <link rel="canonical" href="https://nomigee.com/games/yamanote/">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,135 +33,23 @@
     ]
   }
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #D4AF37;
-      min-height: 100vh;
-      padding: 20px;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .card {
-      background: rgba(30, 30, 30, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 24px;
-      padding: 28px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-    h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #FFD700;
-      margin-bottom: 16px;
-      line-height: 1.4;
-    }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #FFD700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    p {
-      color: rgba(212, 175, 55, 0.9);
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      color: rgba(212, 175, 55, 0.85);
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-      line-height: 1.6;
-    }
-    li:last-child { border-bottom: none; }
-    li::before {
-      content: "▸ ";
-      color: #FFD700;
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(212, 175, 55, 0.2);
-      color: #FFD700;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
-    .cta-button {
-      display: block;
-      width: 100%;
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-      color: #000;
-      text-decoration: none;
-      padding: 18px 24px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-button:active {
-      transform: scale(0.98);
-    }
-    .back-link {
-      display: inline-block;
-      color: rgba(212, 175, 55, 0.7);
-      text-decoration: none;
-      margin-bottom: 20px;
-      font-size: 0.9rem;
-    }
-    .back-link:hover { color: #FFD700; }
-    .variation-card {
-      background: rgba(212, 175, 55, 0.1);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-    .variation-card h3 {
-      color: #FFD700;
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-    .variation-card p {
-      font-size: 0.9rem;
-      margin-bottom: 0;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
     <a href="/games/" class="back-link">← ゲーム一覧に戻る</a>
 
-    <div class="card">
-      <h1>【飲み会ゲーム】山手線ゲーム｜遊び方・ルール・派生</h1>
+    <div class="card card-highlight">
+      <h1>山手線ゲーム｜遊び方・ルール・派生</h1>
       <p>山手線ゲームは、お題に沿った回答を順番に言い合う飲み会の定番ゲームです。リズムに乗れなかったり、回答に詰まった人が罰ゲームとしてお酒を飲みます。</p>
-      <div>
-        <span class="badge">👥 3人〜</span>
-        <span class="badge">⏱ 5分〜</span>
-        <span class="badge">🎯 初心者向け</span>
+      <div class="badges">
+        <span class="badge">3人〜</span>
+        <span class="badge">5分〜</span>
+        <span class="badge">初心者向け</span>
       </div>
     </div>
 
     <div class="card">
-      <h2>📋 基本ルール</h2>
+      <h2>基本ルール</h2>
       <ul>
         <li>参加者で円になるか、順番を決める</li>
         <li>最初の人がお題を決める（例：「山手線の駅名」）</li>
@@ -173,12 +61,12 @@
     </div>
 
     <div class="card">
-      <h2>👥 推奨人数</h2>
+      <h2>推奨人数</h2>
       <p>3人〜10人程度がベスト。人数が多すぎると回答が出尽くすのが早くなります。少人数でも十分楽しめる万能ゲームです。</p>
     </div>
 
     <div class="card">
-      <h2>🎲 派生・バリエーション</h2>
+      <h2>派生・バリエーション</h2>
 
       <div class="variation-card">
         <h3>古今東西ゲーム</h3>
@@ -202,7 +90,7 @@
     </div>
 
     <div class="card">
-      <h2>💡 盛り上がるお題例</h2>
+      <h2>盛り上がるお題例</h2>
       <ul>
         <li>JR各路線の駅名（山手線、中央線など）</li>
         <li>都道府県・県庁所在地</li>
@@ -213,8 +101,8 @@
       </ul>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);">
-      <h2>🎮 今すぐ遊ぶ</h2>
+    <div class="card card-highlight">
+      <h2>今すぐ遊ぶ</h2>
       <p>スマホでそのまま山手線ゲームが遊べます。お題ランダム機能付き！</p>
       <a href="/?mode=normal" class="cta-button">▶ Webでそのまま遊ぶ</a>
     </div>

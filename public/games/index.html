@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>飲み会ゲーム一覧｜ルール・遊び方完全ガイド | 飲みゲー</title>
   <meta name="description" content="飲み会で盛り上がるゲームを完全網羅！山手線ゲーム、キャバ嬢ゲーム、サーティーワンなど人気ゲームのルール・遊び方を解説。そのままWebで遊べます。">
   <meta name="keywords" content="飲み会ゲーム, 飲みゲー, ルール, 遊び方, 山手線ゲーム, キャバ嬢ゲーム">
   <link rel="canonical" href="https://nomigee.com/games/">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,22 +28,12 @@
   }
   </script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #000;
-      color: #D4AF37;
-      min-height: 100vh;
-      padding: 20px;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: 600px; margin: 0 auto; }
     .header {
       text-align: center;
       margin-bottom: 32px;
       padding: 40px 20px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
-      border-radius: 24px;
+      border-radius: 28px;
       border: 1px solid rgba(212, 175, 55, 0.3);
     }
     .logo {
@@ -59,29 +49,37 @@
       color: rgba(212, 175, 55, 0.7);
       font-size: 0.95rem;
     }
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #FFD700;
-      margin-bottom: 20px;
-      text-align: center;
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    .game-list { display: flex; flex-direction: column; gap: 16px; }
     .game-card {
       display: block;
-      background: rgba(30, 30, 30, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: var(--card-bg);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 20px 24px;
       text-decoration: none;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeIn 0.4s ease-out;
     }
-    .game-card:active { transform: scale(0.98); }
+    .game-card:active {
+      transform: scale(0.98);
+    }
+    .game-card:nth-child(2) { animation-delay: 0.05s; }
+    .game-card:nth-child(3) { animation-delay: 0.1s; }
+    .game-card:nth-child(4) { animation-delay: 0.15s; }
+    .game-card:nth-child(5) { animation-delay: 0.2s; }
+    .game-card:nth-child(6) { animation-delay: 0.25s; }
+    .game-card:nth-child(7) { animation-delay: 0.3s; }
+    .game-card:nth-child(8) { animation-delay: 0.35s; }
+    .game-card:nth-child(9) { animation-delay: 0.4s; }
     .game-card-title {
-      color: #FFD700;
+      color: var(--gold-light);
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 6px;
@@ -98,43 +96,19 @@
       margin-left: auto;
       color: rgba(212, 175, 55, 0.5);
     }
-    .badge {
-      display: inline-block;
-      background: rgba(212, 175, 55, 0.2);
-      color: #FFD700;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
     .cta-section {
       margin-top: 32px;
       padding: 28px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
-      border-radius: 24px;
+      border-radius: 28px;
       text-align: center;
       border: 1px solid rgba(212, 175, 55, 0.3);
     }
     .cta-section h2 {
-      color: #FFD700;
-      font-size: 1.2rem;
-      margin-bottom: 12px;
+      justify-content: center;
     }
     .cta-section p {
-      color: rgba(212, 175, 55, 0.8);
-      margin-bottom: 16px;
-      font-size: 0.95rem;
-    }
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-      color: #000;
-      text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 1rem;
-      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+      text-align: center;
     }
   </style>
 </head>
@@ -145,12 +119,12 @@
       <div class="tagline">Ultimate Party Games</div>
     </div>
 
-    <h1>飲み会ゲーム一覧</h1>
+    <h1 style="text-align: center; margin-bottom: 24px;">飲み会ゲーム一覧</h1>
 
     <div class="game-list">
       <a href="/games/yamanote/" class="game-card">
         <div class="game-card-title">
-          🚃 山手線ゲーム
+          山手線ゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">お題に沿った回答を順番に。詰まったら飲む定番ゲーム</div>
@@ -158,7 +132,7 @@
 
       <a href="/games/cabajou/" class="game-card">
         <div class="game-card-title">
-          🃏 キャバ嬢ゲーム
+          キャバ嬢ゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">トランプを使った飲み会の王道。カードごとにルールあり</div>
@@ -166,7 +140,7 @@
 
       <a href="/games/ojisan/" class="game-card">
         <div class="game-card-title">
-          👴 おじさんくじ引き
+          おじさんくじ引き
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">ドボンを引いたら罰ゲーム！シンプル運ゲー</div>
@@ -174,7 +148,7 @@
 
       <a href="/games/roulette/" class="game-card">
         <div class="game-card-title">
-          🎰 飲みゲールーレット
+          飲みゲールーレット
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">何のゲームをするか迷ったらコレ！ランダム決定</div>
@@ -182,7 +156,7 @@
 
       <a href="/games/thirtyone/" class="game-card">
         <div class="game-card-title">
-          🔢 サーティーワンゲーム
+          サーティーワンゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">31を言った人が負け。戦略と心理戦のゲーム</div>
@@ -190,7 +164,7 @@
 
       <a href="/games/pingpong/" class="game-card">
         <div class="game-card-title">
-          🏓 ピンポンパンゲーム
+          ピンポンパンゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">ピン・ポン・パンをリズムよく。パンで次を指名</div>
@@ -198,7 +172,7 @@
 
       <a href="/games/drive/" class="game-card">
         <div class="game-card-title">
-          🚗 ドライブゲーム
+          ドライブゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">ハンドルを握ってコマンドに反応するリアクションゲーム</div>
@@ -206,7 +180,7 @@
 
       <a href="/games/mansion/" class="game-card">
         <div class="game-card-title">
-          🏢 マンションゲーム
+          マンションゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">階数と部屋番号を順番に。酔うほど頭が回らない</div>
@@ -214,7 +188,7 @@
 
       <a href="/games/small/" class="game-card">
         <div class="game-card-title">
-          👥 少人数ゲーム
+          少人数ゲーム
           <span class="game-card-arrow">→</span>
         </div>
         <div class="game-card-desc">2〜4人でも盛り上がるゲーム特集</div>
@@ -222,7 +196,7 @@
     </div>
 
     <div class="cta-section">
-      <h2>🎮 今すぐ遊ぶ</h2>
+      <h2>今すぐ遊ぶ</h2>
       <p>スマホでそのまま全ゲームがプレイできます！</p>
       <a href="/" class="cta-button">▶ アプリを開く</a>
     </div>
