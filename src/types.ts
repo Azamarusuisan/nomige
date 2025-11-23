@@ -1,3 +1,5 @@
+export type GameMode = "normal" | "adult";
+
 export type GameId =
   | "highlow"
   | "kingscup"
