@@ -1,33 +1,74 @@
-# 飲みゲー - 飲み会ゲーム集
+# 飲みゲー (Nomigee) - 飲み会ゲームアプリ
 
-飲み会で盛り上がる7つのゲームを収録したスマホ専用Webアプリ
+モバイルファーストの飲み会ゲームWebアプリ。20種類のゲームを搭載。
 
-## 収録ゲーム
+## 🎮 ゲーム一覧
 
-1. **ハイ&ロー** - 次のカードが大きいか小さいか当てるゲーム
-2. **キングスカップ** - カードごとにルールが決まった定番ゲーム（編集可能）
-3. **飲みゲールーレット** - 今日やるゲームをルーレットで決める
-4. **おじさんくじ引き** - ドボンを引いたら罰ゲーム！
-5. **大喜利** - エロいお題で盛り上がる（100種類のお題）
-6. **飲み歌ルーレット** - 歌う曲をルーレットで決める（編集可能）
-7. **キャバ嬢ゲーム** - トランプで遊ぶ飲み会の定番ゲーム
+### Normal Mode (10ゲーム)
+| ゲーム | slug | 説明 |
+|--------|------|------|
+| キングスカップ | kingcup | カードの能力に従って飲む王道ゲーム |
+| 指名ルーレット | roulette | ホイールで「誰が飲むか」を決める |
+| スマホ王様ゲーム | king | 王様と命令をアプリがランダム決定 |
+| ワードウルフ | wolf | 少数派を会話から当てるゲーム |
+| Truth or Dare | truth | 真実 or 罰ゲームを選ぶ定番 |
+| 恋愛診断ルーレット | love | 恋愛質問をルーレットで引く |
+| 役割デッキ配布 | roles | 飲み会での役割をランダム配布 |
+| 匿名投票ゲーム | vote | 「一番◯◯な人」を匿名投票 |
+| 指差し一致ゲーム | pointfinger | せーので指差し→刺された人が飲む |
+| 座席ルーレット | seatroulette | 止まった方向の人が飲む |
 
-## 技術スタック
+### Adult Mode (10ゲーム) 🔞
+| ゲーム | slug | 説明 |
+|--------|------|------|
+| エロTruth or Dare | a_truth | 大人向けの質問と罰ゲーム |
+| エロ大喜利 | a_oogiri | 大人向けお題で大喜利 |
+| エロ指差しゲーム | a_pointfinger | エロ寄せの指差しゲーム |
+| エロ匿名投票 | a_vote | エロいお題で匿名投票 |
+| エロルーレット | a_roulette | エロい指令をルーレットで決定 |
+| 妄想ストーリーリレー | a_story | エロい妄想をリレー形式で作成 |
+| 経験人数ランキング | a_rank | 経験人数を予想してランキング |
+| 秘密暴露ルーレット | a_secret | 当たった人が秘密を暴露 |
+| エロミッションカード | a_mission | エロいミッションをカードで引く |
+| 理想の夜シチュエーション | a_fantasy | 理想の夜を当て合う |
 
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- localStorage（データ保存）
+## 🛠 技術スタック
 
-## 開発環境のセットアップ
+- **Frontend**: React 19 + TypeScript
+- **Build**: Vite 7
+- **Styling**: Tailwind CSS
+- **Router**: React Router v7
+
+## 📁 ディレクトリ構造
+
+```
+nomikai-app/
+├── src/
+│   ├── components/      # 共通コンポーネント
+│   ├── data/            # ゲームデータ・質問集
+│   │   ├── gamesConfig.ts
+│   │   ├── adultOogiri.ts
+│   │   ├── adultTruthOrDare.ts
+│   │   └── ...
+│   ├── games/
+│   │   ├── normal/      # Normalモードのゲーム
+│   │   └── adult/       # Adultモードのゲーム
+│   └── routes/          # ルーティング
+├── public/
+│   └── games/           # SEO用静的ページ
+│       ├── kingcup/
+│       ├── roulette/
+│       └── ...
+└── dist/                # ビルド出力
+```
+
+## 🚀 起動方法
 
 ```bash
-# 依存関係のインストール
+# インストール
 npm install
 
-# 開発サーバーの起動
+# 開発サーバー起動
 npm run dev
 
 # ビルド
@@ -37,45 +78,42 @@ npm run build
 npm run preview
 ```
 
-## デプロイ
+## 🌐 デプロイ (Render)
 
-### Render Static Site へのデプロイ
+**Static Site** として設定:
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist`
 
-1. Renderアカウントを作成
-2. 新しいStatic Siteを作成
-3. GitHubリポジトリを接続
-4. ビルド設定：
-   - Build Command: `npm run build`
-   - Publish Directory: `dist`
+## 📊 アクセス解析
 
-## カスタマイズ
+Google Analytics を使用する場合、`index.html` のコメントを外してトラッキングIDを設定:
 
-### おじさんくじ引き用の画像を追加
-
-`src/data/ojisanImages.ts` ファイルを編集して画像URLを追加してください：
-
-```typescript
-export const OJISAN_IMAGES: string[] = [
-  "https://example.com/image1.jpg",
-  "https://example.com/image2.jpg",
-  // ...
-];
+```html
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-あなたのID"></script>
 ```
 
-### キングスカップのルールをカスタマイズ
+## 🎨 デザインテーマ
 
-アプリ内でルールを編集できます。編集したルールはlocalStorageに保存されます。
+- Background: `#000000` (黒)
+- Primary Gold: `#D4AF37`
+- Accent Gold: `#FFD700`
+- Adult Mode Pink: `#EC4899`
+- Font: Inter (SF Pro風)
+- iOS風のガラスモーフィズムUI
 
-### 飲み歌ルーレットの曲を追加
+## 📝 TODO (将来の拡張)
 
-アプリ内で曲リストを編集できます。編集したリストはlocalStorageに保存されます。
-
-## ライセンス
-
-MIT
+- [ ] 管理者ダッシュボード
+- [ ] ゲームのお気に入り機能
+- [ ] カスタムルール保存
+- [ ] PWA対応
 
 ## 注意事項
 
 - このアプリはスマホ専用です（縦画面前提）
-- データベースは使用せず、localStorageのみ使用
+- Adult Modeは18歳以上向けです
 - お酒は20歳になってから、適量を楽しみましょう
+
+---
+
+© 2024 飲みゲー - Ultimate Party Games
